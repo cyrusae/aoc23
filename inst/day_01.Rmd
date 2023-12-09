@@ -1,0 +1,58 @@
+---
+title: "12/01 scratchpad"
+output: html_notebook
+---
+
+```{r}
+td1 <- data.table::fread(file = here::here('tests', 'data', 'day_01'),
+                         header = FALSE)
+dd1 <- data.table::fread(file = here::here('data', 'day_01'),
+                         header = FALSE)
+
+```
+
+We need the output of `insert function here` applied to `td1` to be `c(12, 38, 15, 77)` summed to `142`. 
+
+I assume that `treb7chet` turning into `77` means that the first digit gets to also count as the last digit.
+
+```{r}
+td1[, n := stringr::str_remove_all(V1, '\\D')]
+td1[, fi := stringr::str_sub(n, 1, 1)]
+td1[, la := stringr::str_sub(n, -1)]
+td1[, res := paste0(fi, la)]
+sum(td1$res |> as.numeric())
+```
+Well at least the test works. This has *got* to be the kludgiest way possible but finals week gonna do that to me.
+
+Let's make some generics.
+
+And figure out how the fuck `rprojroot` works so I can stop my shameful `here` kludges... maybe.
+
+Update: hrghhh no there's just *no* documentation that tells me the part of this I mean, I don't know what I'm doing wrong? I would ask SO but that's where the RSD lives and this is *basic `rprojroot` intended usage*, I don't know where they're *hiding* it is all? 
+
+```{r}
+take_input <- \(day = 1, pt = 'a', ...) { #use ... to make tests work, for now
+  if (day <= 10) day = paste0(0, day) #this is so bad, oh my G-d.
+  if (pt != 'a') day = paste0(day, 'b') #haven 't done this before, unsure how to handle second part
+  day = paste0('day_', day) #why did I opt for this file name convention anyway
+  using_path <- here::here(..., 'data', day) #why won't rprojroot explain how to stop doing this
+  data.table::fread(file = using_path, header = FALSE) #oh well at least it works 
+}
+```
+
+This is. So bad. This is terrible. Oh well
+
+```{r}
+filter_calibration <- \(dt) {
+  dt[, n := stringr::str_remove_all(V1, '\\D')]
+  dt[, res := 
+       paste0(stringr::str_sub(n, start = 1, end = 1),
+              stringr::str_sub(n, start = -1))]
+  dt$res |> as.numeric()
+}
+
+cal_res <- \(dt) {
+  sum(filter_calibration(dt))
+}
+```
+
