@@ -3,6 +3,8 @@ title: "12/01 scratchpad"
 output: html_notebook
 ---
 
+## part one 
+
 ```{r}
 td1 <- data.table::fread(file = here::here('tests', 'data', 'day_01'),
                          header = FALSE)
@@ -55,4 +57,8 @@ cal_res <- \(dt) {
   sum(filter_calibration(dt))
 }
 ```
+
+
+## part two
+
 
