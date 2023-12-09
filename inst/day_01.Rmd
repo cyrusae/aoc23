@@ -35,7 +35,7 @@ Update: hrghhh no there's just *no* documentation that tells me the part of this
 ```{r}
 take_input <- \(day = 1, pt = 'a', ...) { #use ... to make tests work, for now
   if (day <= 10) day = paste0(0, day) #this is so bad, oh my G-d.
-  if (pt != 'a') day = paste0(day, 'b') #haven 't done this before, unsure how to handle second part
+  if (pt != 'a') day = paste0(day, pt) #haven 't done this before, unsure how to handle second part
   day = paste0('day_', day) #why did I opt for this file name convention anyway
   using_path <- here::here(..., 'data', day) #why won't rprojroot explain how to stop doing this
   data.table::fread(file = using_path, header = FALSE) #oh well at least it works 
@@ -61,4 +61,37 @@ cal_res <- \(dt) {
 
 ## part two
 
+```{r}
+bd1 <- take_input(day = 1, pt = 'b', 'tests')
+```
+```{r}
+fix_written <- \(dt) {
+  vec <- dt$V1 |> as.character()
+  dt[, n := #I'm sure there's better ways to do this. My brain feels like cottage cheese.
+       stringr::str_replace_all(n, 'one', '1')]
+  dt[, n :=
+       stringr::str_replace_all(n, 'two', '2')]
+  dt[, n :=
+       stringr::str_replace_all(n, 'three', '3')]
+  dt[, n :=
+       stringr::str_replace_all(n, 'four', '4')]
+  dt[, n :=
+       stringr::str_replace_all(n, 'five', '5')]
+  dt[, n :=
+       stringr::str_replace_all(n, 'six', '6')]
+  dt[, n :=
+       stringr::str_replace_all(n, 'seven', '7')]
+  dt[, n := #seriously, it's R, there's GOT to be utilities to make this conversion already
+       stringr::str_replace_all(n, 'eight', '8')]
+  dt[, n := 
+       stringr::str_replace_all(n, 'nine', '9')]
+  dt
+}
+```
+
+We want the output for `bd1` to be `29`, `83`, `13`, `24`, `42`, `14`, `76`.
+
+```{r}
+bd1_fix <- fix_written(bd1)
+```
 
