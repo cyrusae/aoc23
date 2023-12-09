@@ -87,3 +87,6 @@ We want the output for `bd1` to be `29`, `83`, `13`, `24`, `42`, `14`, `76`.
 bd1_fix <- fix_written(bd1)
 ```
 
+Ah for fuck's sake.
+
+Come back in a bit and figure out how to fix the precedence there, then.
