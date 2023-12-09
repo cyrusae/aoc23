@@ -67,25 +67,17 @@ bd1 <- take_input(day = 1, pt = 'b', 'tests')
 ```{r}
 fix_written <- \(dt) {
   vec <- dt$V1 |> as.character()
-  dt[, n := #I'm sure there's better ways to do this. My brain feels like cottage cheese.
-       stringr::str_replace_all(n, 'one', '1')]
-  dt[, n :=
-       stringr::str_replace_all(n, 'two', '2')]
-  dt[, n :=
-       stringr::str_replace_all(n, 'three', '3')]
-  dt[, n :=
-       stringr::str_replace_all(n, 'four', '4')]
-  dt[, n :=
-       stringr::str_replace_all(n, 'five', '5')]
-  dt[, n :=
-       stringr::str_replace_all(n, 'six', '6')]
-  dt[, n :=
-       stringr::str_replace_all(n, 'seven', '7')]
-  dt[, n := #seriously, it's R, there's GOT to be utilities to make this conversion already
-       stringr::str_replace_all(n, 'eight', '8')]
-  dt[, n := 
-       stringr::str_replace_all(n, 'nine', '9')]
-  dt
+  vec %<>% stringr::str_replace_all('one', '1') %>%
+    stringr::str_replace_all('two', '2') %>%
+    stringr::str_replace_all('three', '3') %>%
+    stringr::str_replace_all('four', '4') %>%
+    stringr::str_replace_all('five', '5') %>%
+    stringr::str_replace_all('six', '6') %>%
+    stringr::str_replace_all('seven', '7') %>%
+    #seriously, it's R, there's GOT to be utilities to make this conversion already
+    stringr::str_replace_all('eight', '8') %>%
+    stringr::str_replace_all('nine', '9')
+  vec
 }
 ```
 
