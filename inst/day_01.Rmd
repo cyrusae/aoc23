@@ -100,3 +100,30 @@ choi <- c(loi, 1:9) #all characters of interest
 ## yeah that doesn't do what I want either 
 ```
 
+```{r}
+bd1[, ch := stringr::str_flatten(stringr::str_extract_all(V1, pattern = '[onetwhrfuivsxg123456789
+]'), collapse = '')]
+
+t <- bd1$V1
+str_extract_all(t, pattern = '[onetwhrfuivsxg123456789]')
+
+```
+```{r}
+# first letters of interest
+fli <- '[otfsen]'
+lli <- '[eorxnt]'
+sdn <- list(one = 1, two = 2, three = 3,
+            four = 4, five = 5, six = 6,
+            seven = 7, eight = 8, nine = 9)
+kludge <- \(vec) {
+  if (str_starts(string = vec, pattern = '\\d')) x <- vec[1]
+  if (str_starts(string = vec, pattern = '[otfsen]')) {
+    x <- vec[1:5] 
+    x <- stringr::str_flatten(x, na.rm = TRUE)
+  }
+}
+```
+```{r}
+str_starts(string = t, pattern = fli)
+```
+
