@@ -96,7 +96,7 @@ num_eng <- c('one', 'two', 'three', 'four', 'five', 'six', 'seven', 'eight', 'ni
 loi <- strsplit(num_eng, split = '') |> 
   unlist(recursive = FALSE) |> wrapr::uniques()
 choi <- c(loi, 1:9) #all characters of interest
-stringr::str_extract_all(string = bd1$V1[1], pattern = choi) 
-
+# stringr::str_extract_all(string = bd1$V1[1], pattern = choi) 
+## yeah that doesn't do what I want either 
 ```
 
