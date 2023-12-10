@@ -90,3 +90,13 @@ bd1_fix <- fix_written(bd1)
 Ah for fuck's sake.
 
 Come back in a bit and figure out how to fix the precedence there, then.
+
+```{r}
+num_eng <- c('one', 'two', 'three', 'four', 'five', 'six', 'seven', 'eight', 'nine') 
+loi <- strsplit(num_eng, split = '') |> 
+  unlist(recursive = FALSE) |> wrapr::uniques()
+choi <- c(loi, 1:9) #all characters of interest
+stringr::str_extract_all(string = bd1$V1[1], pattern = choi) 
+
+```
+
