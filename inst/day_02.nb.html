@@ -11,7 +11,7 @@
 
 
 
-<title>12/01 scratchpad</title>
+<title>R Notebook</title>
 
 <script>// Pandoc 2.9 adds attributes on both header and div. We remove the former (to
 // be compatible with the behavior of Pandoc < 2.8).
@@ -1746,216 +1746,36 @@ display: none;
 
 
 
-<h1 class="title toc-ignore">12/01 scratchpad</h1>
+<h1 class="title toc-ignore">R Notebook</h1>
 
 </div>
 
 
 <!-- rnb-text-begin -->
-<div id="part-one" class="section level2">
-<h2>part one</h2>
 <!-- rnb-text-end -->
 <!-- rnb-chunk-begin -->
-<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxudGQxIDwtIGRhdGEudGFibGU6OmZyZWFkKGZpbGUgPSBoZXJlOjpoZXJlKCd0ZXN0JywgJ2RhdGEnLCAnZGF5XzAxJykpXG5cbmBgYCJ9 -->
-<pre class="r"><code>td1 &lt;- data.table::fread(file = here::here(&#39;test&#39;, &#39;data&#39;, &#39;day_01&#39;))
-</code></pre>
-<!-- rnb-source-end -->
-<!-- rnb-output-begin eyJkYXRhIjoiRXJyb3IgaW4gZGF0YS50YWJsZTo6ZnJlYWQoZmlsZSA9IGhlcmU6OmhlcmUoXCJ0ZXN0XCIsIFwiZGF0YVwiLCBcImRheV8wMVwiKSkgOiBcbiAgRmlsZSAnQzovVXNlcnMvY3lydXMvR2l0SGVyZS9hb2MyMy90ZXN0L2RhdGEvZGF5XzAxJyBkb2VzIG5vdCBleGlzdCBvciBpcyBub24tcmVhZGFibGUuIGdldHdkKCk9PSdDOi9Vc2Vycy9jeXJ1cy9HaXRIZXJlL2FvYzIzL2luc3QnXG4ifQ== -->
-<pre><code>Error in data.table::fread(file = here::here(&quot;test&quot;, &quot;data&quot;, &quot;day_01&quot;)) : 
-  File &#39;C:/Users/cyrus/GitHere/aoc23/test/data/day_01&#39; does not exist or is non-readable. getwd()==&#39;C:/Users/cyrus/GitHere/aoc23/inst&#39;</code></pre>
-<!-- rnb-output-end -->
-<!-- rnb-chunk-end -->
-<!-- rnb-text-begin -->
-<p>We need the output of <code>insert function here</code> applied to
-<code>td1</code> to be <code>c(12, 38, 15, 77)</code> summed to
-<code>142</code>.</p>
-<p>I assume that <code>treb7chet</code> turning into <code>77</code>
-means that the first digit gets to also count as the last digit.</p>
-<!-- rnb-text-end -->
-<!-- rnb-chunk-begin -->
-<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuc3VtKHRkMSRyZXMgfD4gYXMubnVtZXJpYygpKVxuXG5gYGAifQ== -->
-<pre class="r"><code>sum(td1$res |&gt; as.numeric())
-</code></pre>
-<!-- rnb-source-end -->
-<!-- rnb-output-begin eyJkYXRhIjoiWzFdIDE0MlxuIn0= -->
-<pre><code>[1] 142</code></pre>
-<!-- rnb-output-end -->
-<!-- rnb-chunk-end -->
-<!-- rnb-text-begin -->
-<p>Well at least the test works. This has <em>got</em> to be the
-kludgiest way possible but finals week gonna do that to me.</p>
-<p>Let’s make some generics.</p>
-<p>And figure out how the fuck <code>rprojroot</code> works so I can
-stop my shameful <code>here</code> kludges… maybe.</p>
-<p>Update: hrghhh no there’s just <em>no</em> documentation that tells
-me the part of this I mean, I don’t know what I’m doing wrong? I would
-ask SO but that’s where the RSD lives and this is <em>basic
-<code>rprojroot</code> intended usage</em>, I don’t know where they’re
-<em>hiding</em> it is all?</p>
-<!-- rnb-text-end -->
-<!-- rnb-chunk-begin -->
-<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxudGFrZV9pbnB1dCA8LSBcXChkYXkgPSAxLCBwdCA9ICdhJywgLi4uKSB7ICN1c2UgLi4uIHRvIG1ha2UgdGVzdHMgd29yaywgZm9yIG5vd1xuICBpZiAoZGF5IDw9IDEwKSBkYXkgPSBwYXN0ZTAoMCwgZGF5KSAjdGhpcyBpcyBzbyBiYWQsIG9oIG15IEctZC5cbiAgaWYgKHB0ICE9ICdhJykgZGF5ID0gcGFzdGUwKGRheSwgcHQpICNoYXZlbiAndCBkb25lIHRoaXMgYmVmb3JlLCB1bnN1cmUgaG93IHRvIGhhbmRsZSBzZWNvbmQgcGFydFxuICBkYXkgPSBwYXN0ZTAoJ2RheV8nLCBkYXkpICN3aHkgZGlkIEkgb3B0IGZvciB0aGlzIGZpbGUgbmFtZSBjb252ZW50aW9uIGFueXdheVxuICB1c2luZ19wYXRoIDwtIGhlcmU6OmhlcmUoLi4uLCAnZGF0YScsIGRheSkgI3doeSB3b24ndCBycHJvanJvb3QgZXhwbGFpbiBob3cgdG8gc3RvcCBkb2luZyB0aGlzXG4gIGRhdGEudGFibGU6OmZyZWFkKGZpbGUgPSB1c2luZ19wYXRoLCBoZWFkZXIgPSBGQUxTRSkgI29oIHdlbGwgYXQgbGVhc3QgaXQgd29ya3MgXG59XG5gYGAifQ== -->
-<pre class="r"><code>take_input &lt;- \(day = 1, pt = &#39;a&#39;, ...) { #use ... to make tests work, for now
-  if (day &lt;= 10) day = paste0(0, day) #this is so bad, oh my G-d.
-  if (pt != &#39;a&#39;) day = paste0(day, pt) #haven &#39;t done this before, unsure how to handle second part
-  day = paste0(&#39;day_&#39;, day) #why did I opt for this file name convention anyway
-  using_path &lt;- here::here(..., &#39;data&#39;, day) #why won&#39;t rprojroot explain how to stop doing this
-  data.table::fread(file = using_path, header = FALSE) #oh well at least it works 
-}</code></pre>
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxubGlicmFyeShydmVzdClcbmBgYCJ9 -->
+<pre class="r"><code>library(rvest)</code></pre>
 <!-- rnb-source-end -->
 <!-- rnb-chunk-end -->
 <!-- rnb-text-begin -->
-<p>This is. So bad. This is terrible. Oh well</p>
 <!-- rnb-text-end -->
 <!-- rnb-chunk-begin -->
-<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuZmlsdGVyX2NhbGlicmF0aW9uIDwtIFxcKGR0KSB7XG4gIGR0WywgbiA6PSBzdHJpbmdyOjpzdHJfcmVtb3ZlX2FsbChWMSwgJ1xcXFxEJyldXG4gIGR0WywgcmVzIDo9IFxuICAgICAgIHBhc3RlMChzdHJpbmdyOjpzdHJfc3ViKG4sIHN0YXJ0ID0gMSwgZW5kID0gMSksXG4gICAgICAgICAgICAgIHN0cmluZ3I6OnN0cl9zdWIobiwgc3RhcnQgPSAtMSkpXVxuICBkdCRyZXMgfD4gYXMubnVtZXJpYygpXG59XG5cbmNhbF9yZXMgPC0gXFwoZHQpIHtcbiAgc3VtKGZpbHRlcl9jYWxpYnJhdGlvbihkdCkpXG59XG5gYGAifQ== -->
-<pre class="r"><code>filter_calibration &lt;- \(dt) {
-  dt[, n := stringr::str_remove_all(V1, &#39;\\D&#39;)]
-  dt[, res := 
-       paste0(stringr::str_sub(n, start = 1, end = 1),
-              stringr::str_sub(n, start = -1))]
-  dt$res |&gt; as.numeric()
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuaW5wdXQgPC0gXFwoZGF5ID0gMSwgeWVhciA9IDIwMjMpIHtcbiAgcnZlc3Q6OnNlc3Npb24oJ2h0dHBzOi8vYWR2ZW50b2Zjb2RlLmNvbS97eWVhcn0vZGF5L3tkYXl9L2lucHV0JyxcbiAgICAgICAgICAgICAgICAgeWVhciA9IHllYXIsIGRheSA9IGRheSlcbiAgcnZlc3Q6Omh0bWxfZWxlbWVudHMoKVxufVxuXG5gYGAifQ== -->
+<pre class="r"><code>input &lt;- \(day = 1, year = 2023) {
+  rvest::session(&#39;https://adventofcode.com/{year}/day/{day}/input&#39;,
+                 year = year, day = day)
+  rvest::html_elements()
 }
-
-cal_res &lt;- \(dt) {
-  sum(filter_calibration(dt))
-}</code></pre>
-<!-- rnb-source-end -->
-<!-- rnb-chunk-end -->
-<!-- rnb-text-begin -->
-</div>
-<div id="part-two" class="section level2">
-<h2>part two</h2>
-<!-- rnb-text-end -->
-<!-- rnb-chunk-begin -->
-<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuYmQxIDwtIHRha2VfaW5wdXQoZGF5ID0gMSwgcHQgPSAnYicsICd0ZXN0cycpXG5gYGAifQ== -->
-<pre class="r"><code>bd1 &lt;- take_input(day = 1, pt = &#39;b&#39;, &#39;tests&#39;)</code></pre>
-<!-- rnb-source-end -->
-<!-- rnb-chunk-end -->
-<!-- rnb-chunk-begin -->
-<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuZml4X3dyaXR0ZW4gPC0gXFwoZHQpIHtcbiAgdmVjIDwtIGR0JFYxIHw+IGFzLmNoYXJhY3RlcigpXG4gIHZlYyA8LSBzdHJpbmdyOjpzdHJfcmVwbGFjZV9hbGwodmVjLCAnb25lJywgJzEnKSB8PlxuICAgIHN0cmluZ3I6OnN0cl9yZXBsYWNlX2FsbCgndHdvJywgJzInKSB8PlxuICAgIHN0cmluZ3I6OnN0cl9yZXBsYWNlX2FsbCgndGhyZWUnLCAnMycpIHw+XG4gICAgc3RyaW5ncjo6c3RyX3JlcGxhY2VfYWxsKCdmb3VyJywgJzQnKSB8PlxuICAgIHN0cmluZ3I6OnN0cl9yZXBsYWNlX2FsbCgnZml2ZScsICc1JykgfD5cbiAgICBzdHJpbmdyOjpzdHJfcmVwbGFjZV9hbGwoJ3NpeCcsICc2JykgfD5cbiAgICBzdHJpbmdyOjpzdHJfcmVwbGFjZV9hbGwoJ3NldmVuJywgJzcnKSB8PlxuICAgICNzZXJpb3VzbHksIGl0J3MgUiwgdGhlcmUncyBHT1QgdG8gYmUgdXRpbGl0aWVzIHRvIG1ha2UgdGhpcyBjb252ZXJzaW9uIGFscmVhZHlcbiAgICBzdHJpbmdyOjpzdHJfcmVwbGFjZV9hbGwoJ2VpZ2h0JywgJzgnKSB8PlxuICAgIHN0cmluZ3I6OnN0cl9yZXBsYWNlX2FsbCgnbmluZScsICc5JylcbiAgdmVjXG59XG5gYGAifQ== -->
-<pre class="r"><code>fix_written &lt;- \(dt) {
-  vec &lt;- dt$V1 |&gt; as.character()
-  vec &lt;- stringr::str_replace_all(vec, &#39;one&#39;, &#39;1&#39;) |&gt;
-    stringr::str_replace_all(&#39;two&#39;, &#39;2&#39;) |&gt;
-    stringr::str_replace_all(&#39;three&#39;, &#39;3&#39;) |&gt;
-    stringr::str_replace_all(&#39;four&#39;, &#39;4&#39;) |&gt;
-    stringr::str_replace_all(&#39;five&#39;, &#39;5&#39;) |&gt;
-    stringr::str_replace_all(&#39;six&#39;, &#39;6&#39;) |&gt;
-    stringr::str_replace_all(&#39;seven&#39;, &#39;7&#39;) |&gt;
-    #seriously, it&#39;s R, there&#39;s GOT to be utilities to make this conversion already
-    stringr::str_replace_all(&#39;eight&#39;, &#39;8&#39;) |&gt;
-    stringr::str_replace_all(&#39;nine&#39;, &#39;9&#39;)
-  vec
-}</code></pre>
-<!-- rnb-source-end -->
-<!-- rnb-chunk-end -->
-<!-- rnb-text-begin -->
-<p>We want the output for <code>bd1</code> to be <code>29</code>,
-<code>83</code>, <code>13</code>, <code>24</code>, <code>42</code>,
-<code>14</code>, <code>76</code>.</p>
-<!-- rnb-text-end -->
-<!-- rnb-chunk-begin -->
-<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuYmQxX2ZpeCA8LSBmaXhfd3JpdHRlbihiZDEpXG5gYGAifQ== -->
-<pre class="r"><code>bd1_fix &lt;- fix_written(bd1)</code></pre>
-<!-- rnb-source-end -->
-<!-- rnb-chunk-end -->
-<!-- rnb-text-begin -->
-<p>Ah for fuck’s sake.</p>
-<p>Come back in a bit and figure out how to fix the precedence there,
-then.</p>
-<!-- rnb-text-end -->
-<!-- rnb-chunk-begin -->
-<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxubnVtX2VuZyA8LSBjKCdvbmUnLCAndHdvJywgJ3RocmVlJywgJ2ZvdXInLCAnZml2ZScsICdzaXgnLCAnc2V2ZW4nLCAnZWlnaHQnLCAnbmluZScpIFxubG9pIDwtIHN0cnNwbGl0KG51bV9lbmcsIHNwbGl0ID0gJycpIHw+IFxuICB1bmxpc3QocmVjdXJzaXZlID0gRkFMU0UpIHw+IHdyYXByOjp1bmlxdWVzKClcbmNob2kgPC0gYyhsb2ksIDE6OSkgI2FsbCBjaGFyYWN0ZXJzIG9mIGludGVyZXN0XG4jIHN0cmluZ3I6OnN0cl9leHRyYWN0X2FsbChzdHJpbmcgPSBiZDEkVjFbMV0sIHBhdHRlcm4gPSBjaG9pKSBcbiMjIHllYWggdGhhdCBkb2Vzbid0IGRvIHdoYXQgSSB3YW50IGVpdGhlciBcbmBgYCJ9 -->
-<pre class="r"><code>num_eng &lt;- c(&#39;one&#39;, &#39;two&#39;, &#39;three&#39;, &#39;four&#39;, &#39;five&#39;, &#39;six&#39;, &#39;seven&#39;, &#39;eight&#39;, &#39;nine&#39;) 
-loi &lt;- strsplit(num_eng, split = &#39;&#39;) |&gt; 
-  unlist(recursive = FALSE) |&gt; wrapr::uniques()
-choi &lt;- c(loi, 1:9) #all characters of interest
-# stringr::str_extract_all(string = bd1$V1[1], pattern = choi) 
-## yeah that doesn&#39;t do what I want either </code></pre>
-<!-- rnb-source-end -->
-<!-- rnb-chunk-end -->
-<!-- rnb-text-begin -->
-<!-- rnb-text-end -->
-<!-- rnb-chunk-begin -->
-<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuc3RyX2V4dHJhY3RfYWxsKHQsIHBhdHRlcm4gPSAnW29uZXR3aHJmdWl2c3hnMTIzNDU2Nzg5XScpXG5cbmBgYCJ9 -->
-<pre class="r"><code>str_extract_all(t, pattern = &#39;[onetwhrfuivsxg123456789]&#39;)
 </code></pre>
 <!-- rnb-source-end -->
-<!-- rnb-output-begin eyJkYXRhIjoiW1sxXV1cblsxXSBcInRcIiBcIndcIiBcIm9cIiBcIjFcIiBcIm5cIiBcImlcIiBcIm5cIiBcImVcIlxuXG5bWzJdXVxuIFsxXSBcImVcIiBcImlcIiBcImdcIiBcImhcIiBcInRcIiBcIndcIiBcIm9cIiBcInRcIiBcImhcIiBcInJcIiBcImVcIiBcImVcIlxuXG5bWzNdXVxuIFsxXSBcIm9cIiBcIm5cIiBcImVcIiBcIjJcIiBcInRcIiBcImhcIiBcInJcIiBcImVcIiBcImVcIiBcInhcIlxuXG5bWzRdXVxuIFsxXSBcInhcIiBcInRcIiBcIndcIiBcIm9cIiBcIm5cIiBcImVcIiBcIjNcIiBcImZcIiBcIm9cIiBcInVcIiBcInJcIlxuXG5bWzVdXVxuIFsxXSBcIjRcIiBcIm5cIiBcImlcIiBcIm5cIiBcImVcIiBcImVcIiBcImlcIiBcImdcIiBcImhcIiBcInRcIiBcInNcIiBcImVcIiBcInZcIiBcImVcIiBcIm5cIiBcIjJcIlxuXG5bWzZdXVxuIFsxXSBcIm9cIiBcIm5cIiBcImVcIiBcImlcIiBcImdcIiBcImhcIiBcInRcIiBcIjJcIiBcIjNcIiBcIjRcIlxuXG5bWzddXVxuIFsxXSBcIjdcIiBcInJcIiBcInNcIiBcInRcIiBcInNcIiBcImlcIiBcInhcIiBcInRcIiBcImVcIiBcImVcIiBcIm5cIlxuIn0= -->
-<pre><code>[[1]]
-[1] &quot;t&quot; &quot;w&quot; &quot;o&quot; &quot;1&quot; &quot;n&quot; &quot;i&quot; &quot;n&quot; &quot;e&quot;
-
-[[2]]
- [1] &quot;e&quot; &quot;i&quot; &quot;g&quot; &quot;h&quot; &quot;t&quot; &quot;w&quot; &quot;o&quot; &quot;t&quot; &quot;h&quot; &quot;r&quot; &quot;e&quot; &quot;e&quot;
-
-[[3]]
- [1] &quot;o&quot; &quot;n&quot; &quot;e&quot; &quot;2&quot; &quot;t&quot; &quot;h&quot; &quot;r&quot; &quot;e&quot; &quot;e&quot; &quot;x&quot;
-
-[[4]]
- [1] &quot;x&quot; &quot;t&quot; &quot;w&quot; &quot;o&quot; &quot;n&quot; &quot;e&quot; &quot;3&quot; &quot;f&quot; &quot;o&quot; &quot;u&quot; &quot;r&quot;
-
-[[5]]
- [1] &quot;4&quot; &quot;n&quot; &quot;i&quot; &quot;n&quot; &quot;e&quot; &quot;e&quot; &quot;i&quot; &quot;g&quot; &quot;h&quot; &quot;t&quot; &quot;s&quot; &quot;e&quot; &quot;v&quot; &quot;e&quot; &quot;n&quot; &quot;2&quot;
-
-[[6]]
- [1] &quot;o&quot; &quot;n&quot; &quot;e&quot; &quot;i&quot; &quot;g&quot; &quot;h&quot; &quot;t&quot; &quot;2&quot; &quot;3&quot; &quot;4&quot;
-
-[[7]]
- [1] &quot;7&quot; &quot;r&quot; &quot;s&quot; &quot;t&quot; &quot;s&quot; &quot;i&quot; &quot;x&quot; &quot;t&quot; &quot;e&quot; &quot;e&quot; &quot;n&quot;</code></pre>
-<!-- rnb-output-end -->
 <!-- rnb-chunk-end -->
 <!-- rnb-chunk-begin -->
-<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuYmQxWywgZiA6PSBzdHJpbmdyOjpzdHJfYyhjaFtdLCBjb2xsYXBzZSA9ICcnKV1cblxuYGBgIn0= -->
-<pre class="r"><code>bd1[, f := stringr::str_c(ch[], collapse = &#39;&#39;)]
-</code></pre>
-<!-- rnb-source-end -->
-<!-- rnb-output-begin eyJkYXRhIjoiV2FybmluZzogYXJndW1lbnQgaXMgbm90IGFuIGF0b21pYyB2ZWN0b3I7IGNvZXJjaW5nXG4ifQ== -->
-<pre><code>Warning: argument is not an atomic vector; coercing</code></pre>
-<!-- rnb-output-end -->
-<!-- rnb-chunk-end -->
-<!-- rnb-chunk-begin -->
-<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuc3RyX3N1Yl9hbGwodCwgc3RhcnQgPSAtNSwgZW5kID0gLTEpXG5cbmBgYCJ9 -->
-<pre class="r"><code>str_sub_all(t, start = -5, end = -1)
-</code></pre>
-<!-- rnb-source-end -->
-<!-- rnb-output-begin eyJkYXRhIjoiW1sxXV1cblsxXSBcIjFuaW5lXCJcblxuW1syXV1cblsxXSBcInRocmVlXCJcblxuW1szXV1cblsxXSBcImVleHl6XCJcblxuW1s0XV1cblsxXSBcIjNmb3VyXCJcblxuW1s1XV1cblsxXSBcImV2ZW4yXCJcblxuW1s2XV1cblsxXSBcImh0MjM0XCJcblxuW1s3XV1cblsxXSBcInh0ZWVuXCJcbiJ9 -->
-<pre><code>[[1]]
-[1] &quot;1nine&quot;
-
-[[2]]
-[1] &quot;three&quot;
-
-[[3]]
-[1] &quot;eexyz&quot;
-
-[[4]]
-[1] &quot;3four&quot;
-
-[[5]]
-[1] &quot;even2&quot;
-
-[[6]]
-[1] &quot;ht234&quot;
-
-[[7]]
-[1] &quot;xteen&quot;</code></pre>
-<!-- rnb-output-end -->
-<!-- rnb-chunk-end -->
-<!-- rnb-chunk-begin -->
-<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuc3VtKGRkMSRyZXMpXG5cbmBgYCJ9 -->
-<pre class="r"><code>sum(dd1$res)
-</code></pre>
-<!-- rnb-source-end -->
-<!-- rnb-output-begin eyJkYXRhIjoiWzFdIDU0NTkxXG4ifQ== -->
-<pre><code>[1] 54591</code></pre>
-<!-- rnb-output-end -->
 <!-- rnb-chunk-end -->
 <!-- rnb-text-begin -->
 <!-- rnb-text-end -->
-</div>
 
-<div id="rmd-source-code">LS0tDQp0aXRsZTogIjEyLzAxIHNjcmF0Y2hwYWQiDQpvdXRwdXQ6IGh0bWxfbm90ZWJvb2sNCi0tLQ0KDQojIyBwYXJ0IG9uZSANCg0KYGBge3J9DQp0ZDEgPC0gZGF0YS50YWJsZTo6ZnJlYWQoZmlsZSA9IGhlcmU6OmhlcmUoJ3Rlc3RzJywgJ2RhdGEnLCAnZGF5XzAxJyksDQogICAgICAgICAgICAgICAgICAgICAgICAgaGVhZGVyID0gRkFMU0UpDQpkZDEgPC0gZGF0YS50YWJsZTo6ZnJlYWQoZmlsZSA9IGhlcmU6OmhlcmUoJ2RhdGEnLCAnZGF5XzAxJyksDQogICAgICAgICAgICAgICAgICAgICAgICAgaGVhZGVyID0gRkFMU0UpDQoNCmBgYA0KDQpXZSBuZWVkIHRoZSBvdXRwdXQgb2YgYGluc2VydCBmdW5jdGlvbiBoZXJlYCBhcHBsaWVkIHRvIGB0ZDFgIHRvIGJlIGBjKDEyLCAzOCwgMTUsIDc3KWAgc3VtbWVkIHRvIGAxNDJgLiANCg0KSSBhc3N1bWUgdGhhdCBgdHJlYjdjaGV0YCB0dXJuaW5nIGludG8gYDc3YCBtZWFucyB0aGF0IHRoZSBmaXJzdCBkaWdpdCBnZXRzIHRvIGFsc28gY291bnQgYXMgdGhlIGxhc3QgZGlnaXQuDQoNCmBgYHtyfQ0KdGQxWywgbiA6PSBzdHJpbmdyOjpzdHJfcmVtb3ZlX2FsbChWMSwgJ1xcRCcpXQ0KdGQxWywgZmkgOj0gc3RyaW5ncjo6c3RyX3N1YihuLCAxLCAxKV0NCnRkMVssIGxhIDo9IHN0cmluZ3I6OnN0cl9zdWIobiwgLTEpXQ0KdGQxWywgcmVzIDo9IHBhc3RlMChmaSwgbGEpXQ0Kc3VtKHRkMSRyZXMgfD4gYXMubnVtZXJpYygpKQ0KYGBgDQpXZWxsIGF0IGxlYXN0IHRoZSB0ZXN0IHdvcmtzLiBUaGlzIGhhcyAqZ290KiB0byBiZSB0aGUga2x1ZGdpZXN0IHdheSBwb3NzaWJsZSBidXQgZmluYWxzIHdlZWsgZ29ubmEgZG8gdGhhdCB0byBtZS4NCg0KTGV0J3MgbWFrZSBzb21lIGdlbmVyaWNzLg0KDQpBbmQgZmlndXJlIG91dCBob3cgdGhlIGZ1Y2sgYHJwcm9qcm9vdGAgd29ya3Mgc28gSSBjYW4gc3RvcCBteSBzaGFtZWZ1bCBgaGVyZWAga2x1ZGdlcy4uLiBtYXliZS4NCg0KVXBkYXRlOiBocmdoaGggbm8gdGhlcmUncyBqdXN0ICpubyogZG9jdW1lbnRhdGlvbiB0aGF0IHRlbGxzIG1lIHRoZSBwYXJ0IG9mIHRoaXMgSSBtZWFuLCBJIGRvbid0IGtub3cgd2hhdCBJJ20gZG9pbmcgd3Jvbmc/IEkgd291bGQgYXNrIFNPIGJ1dCB0aGF0J3Mgd2hlcmUgdGhlIFJTRCBsaXZlcyBhbmQgdGhpcyBpcyAqYmFzaWMgYHJwcm9qcm9vdGAgaW50ZW5kZWQgdXNhZ2UqLCBJIGRvbid0IGtub3cgd2hlcmUgdGhleSdyZSAqaGlkaW5nKiBpdCBpcyBhbGw/IA0KDQpgYGB7cn0NCnRha2VfaW5wdXQgPC0gXChkYXkgPSAxLCBwdCA9ICdhJywgLi4uKSB7ICN1c2UgLi4uIHRvIG1ha2UgdGVzdHMgd29yaywgZm9yIG5vdw0KICBpZiAoZGF5IDw9IDEwKSBkYXkgPSBwYXN0ZTAoMCwgZGF5KSAjdGhpcyBpcyBzbyBiYWQsIG9oIG15IEctZC4NCiAgaWYgKHB0ICE9ICdhJykgZGF5ID0gcGFzdGUwKGRheSwgcHQpICNoYXZlbiAndCBkb25lIHRoaXMgYmVmb3JlLCB1bnN1cmUgaG93IHRvIGhhbmRsZSBzZWNvbmQgcGFydA0KICBkYXkgPSBwYXN0ZTAoJ2RheV8nLCBkYXkpICN3aHkgZGlkIEkgb3B0IGZvciB0aGlzIGZpbGUgbmFtZSBjb252ZW50aW9uIGFueXdheQ0KICB1c2luZ19wYXRoIDwtIGhlcmU6OmhlcmUoLi4uLCAnZGF0YScsIGRheSkgI3doeSB3b24ndCBycHJvanJvb3QgZXhwbGFpbiBob3cgdG8gc3RvcCBkb2luZyB0aGlzDQogIGRhdGEudGFibGU6OmZyZWFkKGZpbGUgPSB1c2luZ19wYXRoLCBoZWFkZXIgPSBGQUxTRSkgI29oIHdlbGwgYXQgbGVhc3QgaXQgd29ya3MgDQp9DQpgYGANCg0KVGhpcyBpcy4gU28gYmFkLiBUaGlzIGlzIHRlcnJpYmxlLiBPaCB3ZWxsDQoNCmBgYHtyfQ0KZmlsdGVyX2NhbGlicmF0aW9uIDwtIFwoZHQpIHsNCiAgZHRbLCBuIDo9IHN0cmluZ3I6OnN0cl9yZW1vdmVfYWxsKFYxLCAnXFxEJyldDQogIGR0WywgcmVzIDo9IA0KICAgICAgIHBhc3RlMChzdHJpbmdyOjpzdHJfc3ViKG4sIHN0YXJ0ID0gMSwgZW5kID0gMSksDQogICAgICAgICAgICAgIHN0cmluZ3I6OnN0cl9zdWIobiwgc3RhcnQgPSAtMSkpXQ0KICBkdCRyZXMgfD4gYXMubnVtZXJpYygpDQp9DQoNCmNhbF9yZXMgPC0gXChkdCkgew0KICBzdW0oZmlsdGVyX2NhbGlicmF0aW9uKGR0KSkNCn0NCmBgYA0KDQoNCiMjIHBhcnQgdHdvDQoNCmBgYHtyfQ0KYmQxIDwtIHRha2VfaW5wdXQoZGF5ID0gMSwgcHQgPSAnYicsICd0ZXN0cycpDQpgYGANCmBgYHtyfQ0KZml4X3dyaXR0ZW4gPC0gXChkdCkgew0KICB2ZWMgPC0gZHQkVjEgfD4gYXMuY2hhcmFjdGVyKCkNCiAgdmVjIDwtIHN0cmluZ3I6OnN0cl9yZXBsYWNlX2FsbCh2ZWMsICdvbmUnLCAnMScpIHw+DQogICAgc3RyaW5ncjo6c3RyX3JlcGxhY2VfYWxsKCd0d28nLCAnMicpIHw+DQogICAgc3RyaW5ncjo6c3RyX3JlcGxhY2VfYWxsKCd0aHJlZScsICczJykgfD4NCiAgICBzdHJpbmdyOjpzdHJfcmVwbGFjZV9hbGwoJ2ZvdXInLCAnNCcpIHw+DQogICAgc3RyaW5ncjo6c3RyX3JlcGxhY2VfYWxsKCdmaXZlJywgJzUnKSB8Pg0KICAgIHN0cmluZ3I6OnN0cl9yZXBsYWNlX2FsbCgnc2l4JywgJzYnKSB8Pg0KICAgIHN0cmluZ3I6OnN0cl9yZXBsYWNlX2FsbCgnc2V2ZW4nLCAnNycpIHw+DQogICAgI3NlcmlvdXNseSwgaXQncyBSLCB0aGVyZSdzIEdPVCB0byBiZSB1dGlsaXRpZXMgdG8gbWFrZSB0aGlzIGNvbnZlcnNpb24gYWxyZWFkeQ0KICAgIHN0cmluZ3I6OnN0cl9yZXBsYWNlX2FsbCgnZWlnaHQnLCAnOCcpIHw+DQogICAgc3RyaW5ncjo6c3RyX3JlcGxhY2VfYWxsKCduaW5lJywgJzknKQ0KICB2ZWMNCn0NCmBgYA0KDQpXZSB3YW50IHRoZSBvdXRwdXQgZm9yIGBiZDFgIHRvIGJlIGAyOWAsIGA4M2AsIGAxM2AsIGAyNGAsIGA0MmAsIGAxNGAsIGA3NmAuDQoNCmBgYHtyfQ0KYmQxX2ZpeCA8LSBmaXhfd3JpdHRlbihiZDEpDQpgYGANCg0KQWggZm9yIGZ1Y2sncyBzYWtlLg0KDQpDb21lIGJhY2sgaW4gYSBiaXQgYW5kIGZpZ3VyZSBvdXQgaG93IHRvIGZpeCB0aGUgcHJlY2VkZW5jZSB0aGVyZSwgdGhlbi4NCg0KYGBge3J9DQpudW1fZW5nIDwtIGMoJ29uZScsICd0d28nLCAndGhyZWUnLCAnZm91cicsICdmaXZlJywgJ3NpeCcsICdzZXZlbicsICdlaWdodCcsICduaW5lJykgDQpsb2kgPC0gc3Ryc3BsaXQobnVtX2VuZywgc3BsaXQgPSAnJykgfD4gDQogIHVubGlzdChyZWN1cnNpdmUgPSBGQUxTRSkgfD4gd3JhcHI6OnVuaXF1ZXMoKQ0KY2hvaSA8LSBjKGxvaSwgMTo5KSAjYWxsIGNoYXJhY3RlcnMgb2YgaW50ZXJlc3QNCiMgc3RyaW5ncjo6c3RyX2V4dHJhY3RfYWxsKHN0cmluZyA9IGJkMSRWMVsxXSwgcGF0dGVybiA9IGNob2kpIA0KIyMgeWVhaCB0aGF0IGRvZXNuJ3QgZG8gd2hhdCBJIHdhbnQgZWl0aGVyIA0KYGBgDQoNCmBgYHtyfQ0KYmQxWywgY2ggOj0gc3RyaW5ncjo6c3RyX2ZsYXR0ZW4oc3RyaW5ncjo6c3RyX2V4dHJhY3RfYWxsKFYxLCBwYXR0ZXJuID0gJ1tvbmV0d2hyZnVpdnN4ZzEyMzQ1Njc4OQ0KXScpLCBjb2xsYXBzZSA9ICcnKV0NCg0KdCA8LSBiZDEkVjENCnN0cl9leHRyYWN0X2FsbCh0LCBwYXR0ZXJuID0gJ1tvbmV0d2hyZnVpdnN4ZzEyMzQ1Njc4OV0nKQ0KDQpgYGANCmBgYHtyfQ0KIyBmaXJzdCBsZXR0ZXJzIG9mIGludGVyZXN0DQpmbGkgPC0gJ1tvdGZzZW5dJw0KbGxpIDwtICdbZW9yeG50XScNCnNkbiA8LSBsaXN0KG9uZSA9IDEsIHR3byA9IDIsIHRocmVlID0gMywNCiAgICAgICAgICAgIGZvdXIgPSA0LCBmaXZlID0gNSwgc2l4ID0gNiwNCiAgICAgICAgICAgIHNldmVuID0gNywgZWlnaHQgPSA4LCBuaW5lID0gOSkNCmtsdWRnZSA8LSBcKHZlYykgew0KICBpZiAoc3RyX3N0YXJ0cyhzdHJpbmcgPSB2ZWMsIHBhdHRlcm4gPSAnXFxkJykpIHggPC0gdmVjWzFdDQogIGlmIChzdHJfc3RhcnRzKHN0cmluZyA9IHZlYywgcGF0dGVybiA9ICdbb3Rmc2VuXScpKSB7DQogICAgeCA8LSB2ZWNbMTo1XSANCiAgICB4IDwtIHN0cmluZ3I6OnN0cl9mbGF0dGVuKHgsIG5hLnJtID0gVFJVRSkNCiAgfQ0KfQ0KYGBgDQpgYGB7cn0NCnN0cl9zdGFydHMoc3RyaW5nID0gdCwgcGF0dGVybiA9IGZsaSkNCnN0cl9zdWJfYWxsKHQsIHN0YXJ0ID0gLTUsIGVuZCA9IC0xKQ0KYGBgDQpgYGB7cn0NCnQgPC0gc3RyX3JlbW92ZV9hbGwoc3RyaW5nID0gdCwgcGF0dGVybiA9ICdbXm9uZXR3aHJmdWl2c3hnMTIzNDU2Nzg5XScpDQp0ZmYgPC0gc3RyaW5ncjo6c3RyX3N1YihzdHJpbmcgPSB0LCBzdGFydCA9IDEsIGVuZCA9IDUpDQp0bGYgPC0gc3RyaW5ncjo6c3RyX3N1YihzdHJpbmcgPSB0LCBzdGFydCA9IC01LCBlbmQgPSAtMSkNCg0Kc3RyX3N1YihzdHJpbmcgPSB0ZmZbc3RyaW5ncjo6c3RyX3N0YXJ0cyhzdHJpbmcgPSB0ZmYsIHBhdHRlcm4gPSAnXFxkJyldLCBzdGFydCA9IDEsIGVuZCA9IDEpDQpzdHJfZXh0cmFjdChzdHJpbmcgPSB0LCBwYXR0ZXJuID0gcGF0KQ0KDQpwYXQgPC0gJzF8MnwzfDR8NXw2fDd8OHw5fG9uZXx0d298dGhyZWV8Zm91cnxmaXZlfHNpeHxzZXZlbnxlaWdodHxuaW5lJw0KdGFwIDwtIHN0cmluZ2k6OnN0cmlfcmV2ZXJzZShwYXQpDQpmaXJzdHMgPC0gc3RyX2V4dHJhY3Qoc3RyaW5nID0gdCwgcGF0dGVybiA9IHBhdCkNCmRkMVssIGZpcnN0IDo9IHN0cl9leHRyYWN0KHN0cmluZyA9IFYxLCBwYXR0ZXJuID0gcGF0KV0NCmRkMVssIHJldiA6PSBzdHJpbmdpOjpzdHJpX3JldmVyc2UoVjEpXQ0KZGQxWywgbGFzdCA6PSBzdHJfZXh0cmFjdChzdHJpbmcgPSByZXYsIHBhdHRlcm4gPSB0YXApXQ0KZGQxWywgbGFzdCA6PSBzdHJpbmdpOjpzdHJpX3JldmVyc2UobGFzdCldDQpudW1zIDwtIGRhdGEudGFibGUobiA9IDE6OSwNCiAgICAgICAgICAgICAgICAgICBmcm9udCA9IG5hbWVzKHNkbiksDQogICAgICAgICAgICAgICAgICAgYmFjayA9IHN0cmluZ2k6OnN0cmlfcmV2ZXJzZShuYW1lcyhzZG4pKSkNCmRkMVtmaXJzdCA9PSAnb25lJywgZmlyc3QgOj0gMV0NCmRkMVtmaXJzdCA9PSAndHdvJywgZmlyc3QgOj0gMl0gI0kgS05PVyB0aGVyZSdzIGFuIGVhc2llciB3YXkgdG8gZG8gdGhpcyBidXQgSSdtIGZpbmFscw0KDQpzZXRrZXkobnVtcywgZnJvbnQpDQpkZDFbLCBmaXJzdCA6PSBzdHJpbmdyOjpzdHJfcmVwbGFjZV9hbGwoZmlyc3QsIGMob25lID0gJzEnLCB0d28gPSAnMicsIHRocmVlID0gJzMnLA0KICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIGZvdXIgPSAnNCcsIGZpdmUgPSAnNScsIHNpeCA9ICc2JywgDQogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgc2V2ZW4gPSAnNycsIGVpZ2h0ID0gJzgnLCBuaW5lID0gJzknKSldDQpkZDFbLCBsYXN0IDo9IHN0cmluZ3I6OnN0cl9yZXBsYWNlX2FsbChsYXN0LCBjKG9uZSA9ICcxJywgdHdvID0gJzInLCB0aHJlZSA9ICczJywNCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBmb3VyID0gJzQnLCBmaXZlID0gJzUnLCBzaXggPSAnNicsIA0KICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIHNldmVuID0gJzcnLCBlaWdodCA9ICc4JywgbmluZSA9ICc5JykpXQ0KZGQxWywgcmVzIDo9IGFzLm51bWVyaWMocGFzdGUwKGZpcnN0LCBsYXN0KSldDQpzdW0oZGQxJHJlcykNCiMga2x1ZGdlIDwtIFwodmVjKSB7DQogICNyZXMgPC0gbGlzdChmaXJzdCA9IDAsIGxhc3QgPSAwKQ0KDQojICAgIGlmIChzdHJpbmdyOjpzdHJfc3RhcnRzKHN0cmluZyA9IHRyeSwgcGF0dGVybiA9ICdcXGQnKSkgZmlyc3QgPC0gc3RyaW5ncjo6c3RyX3N1Yih0cnksIHN0YXJ0ID0gMSwgZW5kID0gMSkNCiMgICAgaWYgKHN0cmluZ3I6OnN0cl9lbmRzKHN0cmluZyA9IHRyeSwgcGF0dGVybiA9ICdcXGQnKSkgbGFzdCA8LSBzdHJpbmdyOjpzdHJfc3ViKHRyeSwgc3RhcnQgPSAtMSwgZW5kID0gLTEpDQojICAgIGZmIDwtIHN0cmluZ3I6OnN0cl9zdWIoc3RyaW5nID0gdHJ5LCBzdGFydCA9IDEsIGVuZCA9IDUpDQojfQ0KYGBgDQoNCg==</div>
+<div id="rmd-source-code">LS0tDQp0aXRsZTogIlIgTm90ZWJvb2siDQpvdXRwdXQ6IGh0bWxfbm90ZWJvb2sNCi0tLQ0KDQpgYGB7cn0NCmxpYnJhcnkocnZlc3QpDQpgYGANCg0KYGBge3J9DQppbnB1dCA8LSBcKGRheSA9IDEsIHllYXIgPSAyMDIzKSB7DQogIHJ2ZXN0OjpzZXNzaW9uKCdodHRwczovL2FkdmVudG9mY29kZS5jb20ve3llYXJ9L2RheS97ZGF5fS9pbnB1dCcsDQogICAgICAgICAgICAgICAgIHllYXIgPSB5ZWFyLCBkYXkgPSBkYXkpDQogIHJ2ZXN0OjpodG1sX2VsZW1lbnRzKCkNCn0NCiMgV2VsbCwgdGhhdCBnb3QgYSA0MDAsIHNvIG9ud2FyZHMuDQpgYGANCmBgYHtyfQ0KDQpgYGANCg0K</div>
 
 
 
@@ -2002,7 +1822,7 @@ $(document).ready(function () {
 <!-- code folding -->
 <script>
 $(document).ready(function () {
-  window.initializeSourceEmbed("day_01.Rmd");
+  window.initializeSourceEmbed("day_02.Rmd");
   window.initializeCodeFolding("show" === "show");
 });
 </script>

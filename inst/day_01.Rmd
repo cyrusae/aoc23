@@ -155,7 +155,8 @@ dd1[, first := stringr::str_replace_all(first, c(one = '1', two = '2', three = '
 dd1[, last := stringr::str_replace_all(last, c(one = '1', two = '2', three = '3',
                                                  four = '4', five = '5', six = '6', 
                                                  seven = '7', eight = '8', nine = '9'))]
-dd1[, res := as.character(paste0(first, last))]
+dd1[, res := as.numeric(paste0(first, last))]
+sum(dd1$res)
 # kludge <- \(vec) {
   #res <- list(first = 0, last = 0)
 

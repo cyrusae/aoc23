@@ -1,0 +1,21 @@
+---
+title: "R Notebook"
+output: html_notebook
+---
+
+```{r}
+library(rvest)
+```
+
+```{r}
+input <- \(day = 1, year = 2023) {
+  rvest::session('https://adventofcode.com/{year}/day/{day}/input',
+                 year = year, day = day)
+  rvest::html_elements()
+}
+# Well, that got a 400, so onwards.
+```
+```{r}
+
+```
+
