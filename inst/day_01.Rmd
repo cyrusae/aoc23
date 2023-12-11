@@ -125,5 +125,39 @@ kludge <- \(vec) {
 ```
 ```{r}
 str_starts(string = t, pattern = fli)
+str_sub_all(t, start = -5, end = -1)
+```
+```{r}
+t <- str_remove_all(string = t, pattern = '[^onetwhrfuivsxg123456789]')
+tff <- stringr::str_sub(string = t, start = 1, end = 5)
+tlf <- stringr::str_sub(string = t, start = -5, end = -1)
+
+str_sub(string = tff[stringr::str_starts(string = tff, pattern = '\\d')], start = 1, end = 1)
+str_extract(string = t, pattern = pat)
+
+pat <- '1|2|3|4|5|6|7|8|9|one|two|three|four|five|six|seven|eight|nine'
+tap <- stringi::stri_reverse(pat)
+firsts <- str_extract(string = t, pattern = pat)
+dd1[, first := str_extract(string = V1, pattern = pat)]
+dd1[, rev := stringi::stri_reverse(V1)]
+dd1[, last := str_extract(string = rev, pattern = tap)]
+dd1[, last := stringi::stri_reverse(last)]
+nums <- data.table(n = 1:9,
+                   front = names(sdn),
+                   back = stringi::stri_reverse(names(sdn)))
+dd1[first == 'one', first := 1]
+dd1[first == 'two', first := 2] #I KNOW there's an easier way to do this but I'm finals
+
+setkey(nums, front)
+dd1[stringr::str_match(first, '[1-9]', negate = TRUE), 
+    first := ]
+
+# kludge <- \(vec) {
+  #res <- list(first = 0, last = 0)
+
+#    if (stringr::str_starts(string = try, pattern = '\\d')) first <- stringr::str_sub(try, start = 1, end = 1)
+#    if (stringr::str_ends(string = try, pattern = '\\d')) last <- stringr::str_sub(try, start = -1, end = -1)
+#    ff <- stringr::str_sub(string = try, start = 1, end = 5)
+#}
 ```
 
