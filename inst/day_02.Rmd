@@ -15,6 +15,11 @@ input <- \(day = 1, year = 2023) {
 }
 # Well, that got a 400, so onwards.
 ```
+
+TODO:
+- Format for game data 
+- Reformat to fit game data
+
 ```{r}
 
 ```
