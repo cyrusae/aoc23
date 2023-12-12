@@ -83,3 +83,41 @@ count_color <- \(vec) {
 No that's sideways. Why can't I figure out how not to give myself things sideways.
 
 Update: well at least it's not-sideways in the wrong way instead of just sideways.
+
+
+```{r}
+test_game <- rounds[[1]]
+comp_colors <- stringr::str_extract_all(string = test_game, pattern = 'red|blue|green')
+comp_counts <- stringr::str_extract_all(string = test_game, pattern = '\\d+')
+
+test_colors <- comp_colors[[1]]
+test_counts <- comp_counts[[1]]
+names(test_counts) <- test_colors
+test_counts
+```
+So... *that* works as intended. 
+
+```{r}
+count_color2 <- \(vec) {
+  color_ordered <- stringr::str_extract_all(string = vec, pattern = 'red|blue|green',
+                                            simplify = FALSE) 
+  count_ordered <- stringr::str_extract_all(string = vec, pattern = '\\d+',
+                                            simplify = FALSE) 
+#  furrr::future_map2(.x = color_ordered, .y = count_ordered, .f = name_color) 
+  ### that works but I don't think it's working in parallel as intended, so...
+#  list(colors = color_ordered, counts = count_ordered) ## so THAT works as intended once simplified...
+  ### the fuck definition of 'simple' are we using here
+#  wrapr::as_named_list(color_ordered, count_ordered)
+#  name_color(colors = color_ordered, counts = count_ordered)
+  res <- count_ordered
+  names(res) <- color_ordered
+  res
+}
+```
+...But **this** doesn't...
+
+So I need to do for loops for now. Gross.
+
+TODO: for loops I **guessss**
+
+also my hand to G-d I could do this more elegantly  with lookaheads and capturing groups if I weren't [insert the usual excuses I am so tired please send help and caffeine it is finals]
