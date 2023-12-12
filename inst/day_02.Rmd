@@ -35,11 +35,51 @@ games <- stringr::str_remove_all(string = games, pattern = 'Game \\d+: ')
 ```{r}
 rounds <- stringr::str_split(string = games, pattern = '; ')
 ```
+```{r}
+split_color <- \(round) {
+  res <- stringr::str_split(string = round, pattern = ', ')
+  res
+}
+```
+```{r}
+test_game <- split_color(rounds[[1]])
+test_count <- str_extract_all(string = test_game, pattern = '\\d+')
+test_color <- str_extract_all(string = test_game, pattern = 'red|blue|green')
+
+# wrapr::named_map_builder(targets = test_color[[]], values = test_count)
+test_color[[1]][1]
+
+# as.character(test_color[]) %>% str_replace_all(pattern = 'c|((|))|,', replacement = '')
+## mmmyeah no pe 
+```
 
 ```{r}
-count_color <- \(vec) {
-  res <- c(red = 0, blue = 0, green = 0)
-  
+name_color <- \(colors, counts) {
+#  names(counts) <- colors
+#  counts
+  wrapr::named_map_builder(targets = colors, values = counts)
 }
 ```
 
+What I need at current format is rounds[[i]][j] (e.g. for Game 1 Round 1 rounds[[1]][1] will render me one list 'red' 'green' 'blue' one list '10' '7' '3')
+```{r}
+count_color <- \(vec) {
+  color_ordered <- stringr::str_extract_all(string = vec, pattern = 'red|blue|green',
+                                            simplify = TRUE) 
+  count_ordered <- stringr::str_extract_all(string = vec, pattern = '\\d+',
+                                            simplify = TRUE) 
+#  furrr::future_map2(.x = color_ordered, .y = count_ordered, .f = name_color) 
+  ### that works but I don't think it's working in parallel as intended, so...
+#  list(colors = color_ordered, counts = count_ordered) ## so THAT works as intended once simplified...
+  ### the fuck definition of 'simple' are we using here
+#  wrapr::as_named_list(color_ordered, count_ordered)
+#  name_color(colors = color_ordered, counts = count_ordered)
+  res <- count_ordered
+  names(res) <- color_ordered
+  res
+}
+```
+
+No that's sideways. Why can't I figure out how not to give myself things sideways.
+
+Update: well at least it's not-sideways in the wrong way instead of just sideways.
