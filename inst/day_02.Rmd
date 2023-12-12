@@ -20,7 +20,26 @@ TODO:
 - Format for game data 
 - Reformat to fit game data
 
-```{r}
+What am I to consider an **observation**? -- One round of one game (has features GAME, RED, GREEN, BLUE, ROUND). 
 
+```{r}
+games <- readLines(con = here::here('data', 'day_02'))
+```
+
+```{r}
+names(games) <- 1:100
+```
+```{r}
+games <- stringr::str_remove_all(string = games, pattern = 'Game \\d+: ')
+```
+```{r}
+rounds <- stringr::str_split(string = games, pattern = '; ')
+```
+
+```{r}
+count_color <- \(vec) {
+  res <- c(red = 0, blue = 0, green = 0)
+  
+}
 ```
 
