@@ -223,3 +223,82 @@ round_test <- wrapr::named_map_builder(targets = test_color[[1]],
 
 ```
 
+So I want to have... Game = x, round = y, red = round['red'], green = round['green'], blue = round['blue'].
+
+...iff exists(round['color']).
+
+```{r}
+#Using test_game per above
+
+l <- length(test_game)
+test_count <- str_extract_all(string = test_game, 
+                              pattern = '\\d+')
+test_color <- str_extract_all(string = test_game, 
+                              pattern = 'red|blue|green')
+res <- data.table(game = rep(1, l),
+                  round = seq_along(along.with = test_game),
+                  red = 0,
+                  green = 0,
+                  blue = 0)
+for (i in seq_along(along.with = test_game)) {
+  round <- wrapr::named_map_builder(targets = test_color[[i]],
+                                    values = test_count[[i]])
+#  print(round['red'])
+#  print(test_game[[i]])
+  r <- as.numeric(round['red'])
+  g <- as.numeric(round['green'])
+  b <- as.numeric(round['blue'])
+#  if (r > 0) { #res[round == i, red := round['red']]
+#    print(r)
+#  res[round == i, red := r]
+  res[round == i, `:=` (red = r,
+                        green = g,
+                        blue = b)]
+#  }
+}
+```
+# okay here we go
+
+```{r}
+games <- readLines(con = here::here('data', 'day_02'))
+names(games) <- 1:100
+games <- stringr::str_remove_all(string = games, pattern = 'Game \\d+: ')
+rounds <- stringr::str_split(string = games, pattern = '; ')
+
+count_rounds <- \(games) {
+  res <- data.table::data.table(game = numeric(),
+                                round = numeric(),
+                                red = numeric(),
+                                green = numeric(),
+                                blue = numeric())
+  for (i in seq_along(along.with = games)) {
+    rounds <- stringr::str_split(string = games[[i]], pattern = ', ')
+    l <- length(rounds)
+    colors <- str_extract_all(string = test_game, 
+                              pattern = 'red|blue|green')
+    counts <- str_extract_all(string = test_game, 
+                              pattern = '\\d+')
+    game <- data.table::data.table(game = i,
+                                   round = seq_along(along.with = rounds),
+                                   red = 0,
+                                   green = 0,
+                                   blue = 0)
+    for (x in seq_along(along.with = rounds)) {
+      round <- wrapr::named_map_builder(targets = colors[[x]],
+                                        values = counts[[x]])
+      r <- as.numeric(round['red'])
+      g <- as.numeric(round['green'])
+      b <- as.numeric(round['blue'])
+      game[round == x, `:=` (red = r,
+                             green = g,
+                             blue = b)]
+    }
+    res <- poorman::bind_rows(res, game)
+  }
+  res
+}
+```
+```{r}
+suppressWarnings(count_rounds(games = rounds))
+```
+
