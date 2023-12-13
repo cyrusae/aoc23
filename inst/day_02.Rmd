@@ -167,3 +167,59 @@ wrapr::named_map_builder(targets = test_color[[1]], values = test_count[[1]])
 ```
 Okay...
 
+Wait, where did those come from???
+
+
+```{r}
+split_color <- \(round) {
+  res <- stringr::str_split(string = round, pattern = ', ')
+  res
+}
+
+test_game <- split_color(rounds[[1]])
+test_count <- str_extract_all(string = test_game, pattern = '\\d+')
+test_color <- str_extract_all(string = test_game, pattern = 'red|blue|green')
+```
+
+```{r}
+# lapply(X = rounds[], FUN = split_color) ## nooope
+round_test <- wrapr::named_map_builder(targets = test_color[[1]],
+                                       values = test_count[[1]])
+# this will make `round_test['red']` give me what I want.
+# at last.
+
+games <- vector(mode = 'list', length = length(rounds))
+for (i in seq_along(along.with = rounds)) {
+  use <- rounds[[i]]
+  game <- split_color(round = use)
+  color <- stringr::str_extract_all(string = game,
+                                    pattern = 'red|blue|green')
+  count <- stringr::str_extract_all(string = game,
+                                    pattern = '\\d+')
+  for (x in seq_along(along.with = game)) {
+    round <- wrapr::named_map_builder(targets = color,
+                                      values = count)
+    game[[x]] <- round
+  }
+  game
+}
+
+```
+
+Oh nope absolutely not. Not that. Ooookay.
+
+```{r}
+split_color <- \(round) {
+  res <- stringr::str_split(string = round, pattern = ', ')
+}
+
+test_game <- split_color(rounds[[1]])
+test_count <- str_extract_all(string = test_game, pattern = '\\d+')
+test_color <- str_extract_all(string = test_game, pattern = 'red|blue|green')
+round_test <- wrapr::named_map_builder(targets = test_color[[1]],
+                                       values = test_count[[1]])
+# this will make `round_test['red']` give me what I want.
+# at last.
+
+```
+
