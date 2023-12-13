@@ -303,7 +303,8 @@ count_rounds <- \(games, red = 12, green = 13, blue = 14) {
 }
 ```
 ```{r}
-counted_games <- suppressWarnings(count_rounds(games = rounds))
+counted_games <- suppressWarnings(
+  count_rounds(games = rounds, red = 12, green = 13, blue = 14))
 ```
 ...oh G-d now I have to solve the actual puzzle.
 
@@ -315,5 +316,21 @@ HA (I think????)
 #moment of truth
 
 sum(uniques(counted_games$game))
+```
+YAY
+
+## part 2
+
+```{r}
+all_games <- suppressWarnings(
+  count_rounds(games = rounds, red = Inf, green = Inf, blue = Inf))
+```
+```{r}
+all_games[, pwr := (max(red, na.rm = TRUE)
+                    * max(green, na.rm = TRUE)
+                    * max(blue, na.rm = TRUE)),
+          by = game]
+all_pwr <- all_games[round == 1, pwr]
+sum(all_pwr)
 ```
 
