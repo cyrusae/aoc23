@@ -265,7 +265,7 @@ names(games) <- 1:100
 games <- stringr::str_remove_all(string = games, pattern = 'Game \\d+: ')
 rounds <- stringr::str_split(string = games, pattern = '; ')
 
-count_rounds <- \(games) {
+count_rounds <- \(games, red = 12, green = 13, blue = 14) {
   res <- data.table::data.table(game = numeric(),
                                 round = numeric(),
                                 red = numeric(),
@@ -274,9 +274,9 @@ count_rounds <- \(games) {
   for (i in seq_along(along.with = games)) {
     rounds <- stringr::str_split(string = games[[i]], pattern = ', ')
     l <- length(rounds)
-    colors <- str_extract_all(string = test_game, 
+    colors <- str_extract_all(string = rounds, 
                               pattern = 'red|blue|green')
-    counts <- str_extract_all(string = test_game, 
+    counts <- str_extract_all(string = rounds, 
                               pattern = '\\d+')
     game <- data.table::data.table(game = i,
                                    round = seq_along(along.with = rounds),
@@ -293,12 +293,27 @@ count_rounds <- \(games) {
                              green = g,
                              blue = b)]
     }
-    res <- poorman::bind_rows(res, game)
+    if (max(game$red, na.rm = TRUE) <= red & 
+        max(game$green, na.rm = TRUE) <= green & 
+        max(game$blue, na.rm = TRUE) <= blue) {
+      res <- poorman::bind_rows(res, game)
+    }
   }
   res
 }
 ```
 ```{r}
-suppressWarnings(count_rounds(games = rounds))
+counted_games <- suppressWarnings(count_rounds(games = rounds))
+```
+...oh G-d now I have to solve the actual puzzle.
+
+Find games that would be possible with only: 12 red cubes, 13 green cubes, and 14 blue cubes. And sum their IDs. Okay.
+
+HA (I think????)
+
+```{r}
+#moment of truth
+
+sum(uniques(counted_games$game))
 ```
 
