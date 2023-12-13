@@ -121,3 +121,49 @@ So I need to do for loops for now. Gross.
 TODO: for loops I **guessss**
 
 also my hand to G-d I could do this more elegantly  with lookaheads and capturing groups if I weren't [insert the usual excuses I am so tired please send help and caffeine it is finals]
+
+```{r}
+### This worked: 
+# test_game <- rounds[[1]]
+# comp_colors <- stringr::str_extract_all(string = test_game, pattern = 'red|blue|green')
+# comp_counts <- stringr::str_extract_all(string = test_game, pattern = '\\d+')
+
+# test_colors <- comp_colors[[1]]
+# test_counts <- comp_counts[[1]]
+# names(test_counts) <- test_colors
+
+count_slowly <- \(rounds) {
+  res <- vector(mode = 'list', length = length(rounds))
+  for (i in seq_along(along.with = rounds)) {
+    round <- rounds[[i]]
+    colors <- stringr::str_extract_all(string = round,
+                                       pattern = 'red|blue|green')
+    counts <- stringr::str_extract_all(string = round,
+                                       pattern = '\\d+')
+#    names(counts) <- colors
+#    res[[i]] <- counts
+#    names(res[[i]]) <- colors
+#    names(res[i]) <- paste0('round ', as.character(i))
+  }
+  res
+}
+
+# count_slowly(rounds = rounds[1])
+# nooooo
+
+test <- count_slowly(rounds = rounds[[1]])
+```
+
+```{r}
+test_rounds <- rounds[1]
+class(test_rounds)
+test_rounds[[1]][2]
+```
+
+```{r}
+test_color[[1]]
+test_count[[1]]
+wrapr::named_map_builder(targets = test_color[[1]], values = test_count[[1]])
+```
+Okay...
+
